@@ -1,0 +1,52 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model HistoricalStockData {
+  close       Float?
+  createdAt   DateTime  @default(now())
+  date        DateTime?
+  high        Float?
+  id          String    @id @default(cuid())
+  low         Float?
+  open        Float?
+  symbolField String?
+  updatedAt   DateTime  @updatedAt
+  volume      Int?
+}
+
+model RealTimeSocialMedia {
+  content     String?
+  createdAt   DateTime                          @default(now())
+  date        DateTime?
+  id          String                            @id @default(cuid())
+  platform    String?
+  sentiment   EnumRealTimeSocialMediaSentiment?
+  symbolField String?
+  updatedAt   DateTime                          @updatedAt
+}
+
+model RealTimeNews {
+  content     String?
+  createdAt   DateTime                   @default(now())
+  date        DateTime?
+  id          String                     @id @default(cuid())
+  sentiment   EnumRealTimeNewsSentiment?
+  source      String?
+  symbolField String?
+  title       String?
+  updatedAt   DateTime                   @updatedAt
+}
+
+enum EnumRealTimeSocialMediaSentiment {
+  Option1
+}
+
+enum EnumRealTimeNewsSentiment {
+  Option1
+}
